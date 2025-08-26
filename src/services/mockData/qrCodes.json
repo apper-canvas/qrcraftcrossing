@@ -1,0 +1,132 @@
+[
+  {
+    "Id": 1,
+    "type": "url",
+    "content": {
+      "url": "https://www.apple.com"
+    },
+    "design": {
+      "backgroundColor": "#ffffff",
+      "foregroundColor": "#000000",
+      "pattern": "square",
+      "cornerRadius": 0,
+      "size": 300
+    },
+    "shortUrl": "https://qr.ly/abc123",
+    "scanCount": 247,
+    "createdAt": "2024-01-15T10:30:00Z",
+    "folderId": 1,
+    "templateId": null,
+    "isDynamic": false
+  },
+  {
+    "Id": 2,
+    "type": "vcard",
+    "content": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+1 (555) 123-4567",
+      "email": "john@example.com",
+      "organization": "Tech Corp"
+    },
+    "design": {
+      "backgroundColor": "#f3e8ff",
+      "foregroundColor": "#7c3aed",
+      "pattern": "rounded",
+      "cornerRadius": 15,
+      "size": 250
+    },
+    "shortUrl": "https://qr.ly/def456",
+    "scanCount": 89,
+    "createdAt": "2024-01-18T14:22:00Z",
+    "folderId": null,
+    "templateId": 1,
+    "isDynamic": true
+  },
+  {
+    "Id": 3,
+    "type": "wifi",
+    "content": {
+      "ssid": "Office WiFi",
+      "password": "SecurePass123",
+      "security": "WPA"
+    },
+    "design": {
+      "backgroundColor": "#dcfce7",
+      "foregroundColor": "#166534",
+      "pattern": "dots",
+      "cornerRadius": 20,
+      "size": 200
+    },
+    "shortUrl": "https://qr.ly/ghi789",
+    "scanCount": 156,
+    "createdAt": "2024-01-20T09:15:00Z",
+    "folderId": 2,
+    "templateId": null,
+    "isDynamic": false
+  },
+  {
+    "Id": 4,
+    "type": "text",
+    "content": {
+      "text": "Welcome to our conference! Visit booth #42 for special offers."
+    },
+    "design": {
+      "backgroundColor": "#fed7aa",
+      "foregroundColor": "#c2410c",
+      "pattern": "circles",
+      "cornerRadius": 10,
+      "size": 300
+    },
+    "shortUrl": "https://qr.ly/jkl012",
+    "scanCount": 312,
+    "createdAt": "2024-01-22T16:45:00Z",
+    "folderId": 1,
+    "templateId": 2,
+    "isDynamic": false
+  },
+  {
+    "Id": 5,
+    "type": "url",
+    "content": {
+      "url": "https://github.com/qrcraft/pro"
+    },
+    "design": {
+      "backgroundColor": "#1f2937",
+      "foregroundColor": "#ffffff",
+      "pattern": "square",
+      "cornerRadius": 5,
+      "size": 400
+    },
+    "shortUrl": "https://qr.ly/mno345",
+    "scanCount": 78,
+    "createdAt": "2024-01-25T11:20:00Z",
+    "folderId": 3,
+    "templateId": null,
+    "isDynamic": true
+  },
+  {
+    "Id": 6,
+    "type": "vcard",
+    "content": {
+      "firstName": "Sarah",
+      "lastName": "Wilson",
+      "phone": "+1 (555) 987-6543",
+      "email": "sarah.wilson@company.com",
+      "organization": "Design Studio"
+    },
+    "design": {
+      "backgroundColor": "#dbeafe",
+      "foregroundColor": "#1e40af",
+      "pattern": "rounded",
+      "cornerRadius": 25,
+      "size": 250
+    },
+    "shortUrl": "https://qr.ly/pqr678",
+    "scanCount": 134,
+    "createdAt": "2024-01-28T13:10:00Z",
+    "folderId": null,
+    "templateId": 1,
+    "isDynamic": false
+  }
+]

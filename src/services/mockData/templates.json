@@ -1,0 +1,80 @@
+[
+  {
+    "Id": 1,
+    "name": "Corporate Purple",
+    "design": {
+      "backgroundColor": "#f3e8ff",
+      "foregroundColor": "#7c3aed",
+      "pattern": "rounded",
+      "cornerRadius": 15,
+      "size": 250
+    },
+    "thumbnail": null,
+    "isDefault": true
+  },
+  {
+    "Id": 2,
+    "name": "Conference Orange",
+    "design": {
+      "backgroundColor": "#fed7aa",
+      "foregroundColor": "#c2410c",
+      "pattern": "circles",
+      "cornerRadius": 10,
+      "size": 300
+    },
+    "thumbnail": null,
+    "isDefault": false
+  },
+  {
+    "Id": 3,
+    "name": "Tech Dark",
+    "design": {
+      "backgroundColor": "#1f2937",
+      "foregroundColor": "#ffffff",
+      "pattern": "square",
+      "cornerRadius": 5,
+      "size": 400
+    },
+    "thumbnail": null,
+    "isDefault": true
+  },
+  {
+    "Id": 4,
+    "name": "Ocean Blue",
+    "design": {
+      "backgroundColor": "#dbeafe",
+      "foregroundColor": "#1e40af",
+      "pattern": "rounded",
+      "cornerRadius": 20,
+      "size": 250
+    },
+    "thumbnail": null,
+    "isDefault": false
+  },
+  {
+    "Id": 5,
+    "name": "Forest Green",
+    "design": {
+      "backgroundColor": "#dcfce7",
+      "foregroundColor": "#166534",
+      "pattern": "dots",
+      "cornerRadius": 18,
+      "size": 200
+    },
+    "thumbnail": null,
+    "isDefault": true
+  },
+  {
+    "Id": 6,
+    "name": "Sunset Gradient",
+    "design": {
+      "backgroundColor": "#fef3c7",
+      "foregroundColor": "#d97706",
+      "pattern": "circles",
+      "cornerRadius": 12,
+      "size": 280
+    },
+    "thumbnail": null,
+    "isDefault": false
+  }
+]

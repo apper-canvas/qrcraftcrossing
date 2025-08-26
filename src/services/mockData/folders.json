@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 1,
+    "name": "Marketing Campaign",
+    "color": "#3b82f6",
+    "qrCount": 8,
+    "sharedWith": ["team@example.com"]
+  },
+  {
+    "Id": 2,
+    "name": "Office Resources",
+    "color": "#10b981",
+    "qrCount": 12,
+    "sharedWith": []
+  },
+  {
+    "Id": 3,
+    "name": "Personal Projects",
+    "color": "#8b5cf6",
+    "qrCount": 5,
+    "sharedWith": []
+  },
+  {
+    "Id": 4,
+    "name": "Client Work",
+    "color": "#f59e0b",
+    "qrCount": 15,
+    "sharedWith": ["client@company.com", "manager@example.com"]
+  },
+  {
+    "Id": 5,
+    "name": "Events & Conferences",
+    "color": "#ef4444",
+    "qrCount": 23,
+    "sharedWith": ["events@company.com"]
+  }
+]

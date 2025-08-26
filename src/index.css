@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+/* Custom Toast Styles */
+:root {
+  --toastify-color-light: #ffffff;
+  --toastify-color-dark: #1f2937;
+  --toastify-color-info: #3b82f6;
+  --toastify-color-success: #10b981;
+  --toastify-color-warning: #f59e0b;
+  --toastify-color-error: #ef4444;
+  --toastify-toast-width: 360px;
+  --toastify-toast-min-height: 64px;
+}
+
+.Toastify__toast {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 16px;
+}
+
+.Toastify__toast-container {
+  z-index: 9999;
+}
+
+.Toastify__progress-bar {
+  height: 3px;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Custom scroll styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+/* QR Canvas container */
+.qr-canvas-container {
+  background: linear-gradient(45deg, #f8fafc 25%, transparent 25%),
+              linear-gradient(-45deg, #f8fafc 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #f8fafc 75%),
+              linear-gradient(-45deg, transparent 75%, #f8fafc 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Animation classes */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom button glow effect */
+.btn-glow {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+}

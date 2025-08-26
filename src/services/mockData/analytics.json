@@ -1,0 +1,28 @@
+{
+  "totalQrCodes": 47,
+  "totalScans": 1842,
+  "avgScansPerQr": 39,
+  "periodScans": 284,
+  "scansByDay": [
+    {"date": "2024-01-20", "scans": 45},
+    {"date": "2024-01-21", "scans": 52},
+    {"date": "2024-01-22", "scans": 38},
+    {"date": "2024-01-23", "scans": 67},
+    {"date": "2024-01-24", "scans": 43},
+    {"date": "2024-01-25", "scans": 29},
+    {"date": "2024-01-26", "scans": 58}
+  ],
+  "topQrCodes": [
+    {"Id": 4, "content": "Conference Welcome", "scans": 312, "createdAt": "2024-01-22T16:45:00Z"},
+    {"Id": 1, "content": "Apple Website", "scans": 247, "createdAt": "2024-01-15T10:30:00Z"},
+    {"Id": 3, "content": "Office WiFi", "scans": 156, "createdAt": "2024-01-20T09:15:00Z"},
+    {"Id": 6, "content": "Sarah Wilson", "scans": 134, "createdAt": "2024-01-28T13:10:00Z"},
+    {"Id": 2, "content": "John Doe", "scans": 89, "createdAt": "2024-01-18T14:22:00Z"}
+  ],
+  "typeDistribution": [
+    {"type": "url", "count": 18},
+    {"type": "vcard", "count": 12},
+    {"type": "wifi", "count": 9},
+    {"type": "text", "count": 8}
+  ]
+}
