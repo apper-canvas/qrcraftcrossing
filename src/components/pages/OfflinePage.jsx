@@ -137,10 +137,12 @@ const OfflinePage = () => {
 
   const getContentPreview = (qrCode) => {
     switch (qrCode.type) {
-      case "url":
+case "url":
         return qrCode.content?.url || "No URL"
       case "vcard":
-        return `${qrCode.content?.firstName} ${qrCode.content?.lastName}` || "Contact"
+        return (qrCode.content?.firstName || qrCode.content?.lastName) 
+          ? `${qrCode.content.firstName || ''} ${qrCode.content.lastName || ''}`.trim()
+          : "Contact"
       case "wifi":
         return qrCode.content?.ssid || "WiFi Network"
       case "text":
