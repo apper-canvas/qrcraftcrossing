@@ -24,5 +24,28 @@
     {"type": "vcard", "count": 12},
     {"type": "wifi", "count": 9},
     {"type": "text", "count": 8}
-  ]
+  ],
+  "locationData": {
+    "countries": [
+      {"name": "United States", "code": "US", "scans": 742, "percentage": 40.3},
+      {"name": "United Kingdom", "code": "GB", "scans": 287, "percentage": 15.6},
+      {"name": "Germany", "code": "DE", "scans": 234, "percentage": 12.7},
+      {"name": "Canada", "code": "CA", "scans": 189, "percentage": 10.3},
+      {"name": "Australia", "code": "AU", "scans": 156, "percentage": 8.5},
+      {"name": "France", "code": "FR", "scans": 134, "percentage": 7.3},
+      {"name": "Japan", "code": "JP", "scans": 100, "percentage": 5.4}
+    ],
+    "cities": [
+      {"name": "New York", "country": "United States", "scans": 234, "coordinates": [40.7128, -74.0060]},
+      {"name": "London", "country": "United Kingdom", "scans": 189, "coordinates": [51.5074, -0.1278]},
+      {"name": "Berlin", "country": "Germany", "scans": 156, "coordinates": [52.5200, 13.4050]},
+      {"name": "Toronto", "country": "Canada", "scans": 134, "coordinates": [43.6532, -79.3832]},
+      {"name": "Sydney", "country": "Australia", "scans": 123, "coordinates": [-33.8688, 151.2093]},
+      {"name": "Los Angeles", "country": "United States", "scans": 112, "coordinates": [34.0522, -118.2437]},
+      {"name": "Paris", "country": "France", "scans": 98, "coordinates": [48.8566, 2.3522]},
+      {"name": "Tokyo", "country": "Japan", "scans": 87, "coordinates": [35.6762, 139.6503]}
+    ],
+    "totalCountries": 7,
+    "totalCities": 8
+  }
 }
