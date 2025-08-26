@@ -4,34 +4,54 @@
     "name": "Marketing Campaign",
     "color": "#3b82f6",
     "qrCount": 8,
-    "sharedWith": ["team@example.com"]
+    "sharedWith": ["team@example.com"],
+    "owner": "john.doe@example.com",
+    "teamMembers": [
+      {"id": 1, "name": "Sarah Wilson", "email": "sarah@example.com", "role": "Editor", "permission": "edit"},
+      {"id": 2, "name": "Mike Chen", "email": "mike@example.com", "role": "Viewer", "permission": "view"}
+    ]
   },
   {
     "Id": 2,
     "name": "Office Resources",
     "color": "#10b981",
     "qrCount": 12,
-    "sharedWith": []
+    "sharedWith": [],
+    "owner": "admin@example.com",
+    "teamMembers": []
   },
   {
     "Id": 3,
     "name": "Personal Projects",
     "color": "#8b5cf6",
     "qrCount": 5,
-    "sharedWith": []
+    "sharedWith": [],
+    "owner": "current-user@example.com",
+    "teamMembers": []
   },
   {
     "Id": 4,
     "name": "Client Work",
     "color": "#f59e0b",
     "qrCount": 15,
-    "sharedWith": ["client@company.com", "manager@example.com"]
+    "sharedWith": ["client@company.com", "manager@example.com"],
+    "owner": "project.manager@example.com",
+    "teamMembers": [
+      {"id": 3, "name": "Alex Thompson", "email": "alex@client.com", "role": "Client", "permission": "view"},
+      {"id": 4, "name": "Lisa Park", "email": "lisa@example.com", "role": "Manager", "permission": "admin"}
+    ]
   },
   {
     "Id": 5,
     "name": "Events & Conferences",
     "color": "#ef4444",
     "qrCount": 23,
-    "sharedWith": ["events@company.com"]
+    "sharedWith": ["events@company.com"],
+    "owner": "events.coordinator@example.com",
+    "teamMembers": [
+      {"id": 5, "name": "David Kim", "email": "david@events.com", "role": "Coordinator", "permission": "edit"},
+      {"id": 6, "name": "Emma Davis", "email": "emma@events.com", "role": "Assistant", "permission": "view"},
+      {"id": 7, "name": "Ryan Taylor", "email": "ryan@events.com", "role": "Designer", "permission": "edit"}
+    ]
   }
 ]

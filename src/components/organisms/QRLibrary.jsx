@@ -12,7 +12,6 @@ import Empty from "@/components/ui/Empty"
 import { qrCodeService } from "@/services/api/qrCodeService"
 import { folderService } from "@/services/api/folderService"
 import { formatDistanceToNow } from "date-fns"
-
 const QRLibrary = () => {
 const [qrCodes, setQrCodes] = useState([])
   const [folders, setFolders] = useState([])
@@ -151,7 +150,7 @@ const handleEdit = (qrCode) => {
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar */}
         <div className="lg:w-64 space-y-4">
-          <Card className="p-4">
+<Card className="p-4">
             <h3 className="font-semibold text-gray-900 mb-3">Folders</h3>
             <div className="space-y-1">
               <button
@@ -183,8 +182,42 @@ const handleEdit = (qrCode) => {
                     className="w-4 h-4 rounded mr-3" 
                     style={{ backgroundColor: folder.color }}
                   />
-                  {folder.name}
-                  <Badge variant="default" size="sm" className="ml-auto">
+                  <div className="flex-1 text-left">
+                    <div className="flex items-center">
+                      <span>{folder.name}</span>
+                      {folder.teamMembers && folder.teamMembers.length > 0 && (
+                        <div className="flex items-center ml-2">
+                          <ApperIcon name="Users" className="w-3 h-3 text-gray-400 mr-1" />
+                          <div className="flex -space-x-1">
+                            {folder.teamMembers.slice(0, 3).map((member, index) => (
+                              <div
+                                key={member.id}
+                                className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 border border-white flex items-center justify-center"
+                                title={member.name}
+                              >
+                                <span className="text-[8px] text-white font-medium">
+                                  {member.name.charAt(0).toUpperCase()}
+                                </span>
+                              </div>
+                            ))}
+                            {folder.teamMembers.length > 3 && (
+                              <div className="w-4 h-4 rounded-full bg-gray-400 border border-white flex items-center justify-center">
+                                <span className="text-[8px] text-white font-medium">
+                                  +{folder.teamMembers.length - 3}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {folder.owner && (
+                      <div className="text-xs text-gray-500 mt-0.5">
+                        Owner: {folder.owner}
+                      </div>
+                    )}
+                  </div>
+                  <Badge variant="default" size="sm">
                     {folder.qrCount}
                   </Badge>
                 </button>
