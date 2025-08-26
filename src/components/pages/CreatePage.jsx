@@ -1,16 +1,16 @@
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { toast } from "react-toastify"
-import QRTypeSelector from "@/components/molecules/QRTypeSelector"
-import ContentForm from "@/components/molecules/ContentForm"
-import QRPreview from "@/components/molecules/QRPreview"
-import CustomizationPanel from "@/components/molecules/CustomizationPanel"
-import ApperIcon from "@/components/ApperIcon"
-import Button from "@/components/atoms/Button"
-import { qrCodeService } from "@/services/api/qrCodeService"
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { qrCodeService } from "@/services/api/qrCodeService";
+import ApperIcon from "@/components/ApperIcon";
+import CustomizationPanel from "@/components/molecules/CustomizationPanel";
+import QRTypeSelector from "@/components/molecules/QRTypeSelector";
+import QRPreview from "@/components/molecules/QRPreview";
+import ContentForm from "@/components/molecules/ContentForm";
+import Button from "@/components/atoms/Button";
 
 const CreatePage = () => {
-  const [selectedType, setSelectedType] = useState("")
+const [selectedType, setSelectedType] = useState("")
   const [content, setContent] = useState({})
   const [design, setDesign] = useState({
     backgroundColor: "#ffffff",
@@ -20,6 +20,7 @@ const CreatePage = () => {
     size: 200
   })
   const [step, setStep] = useState(1)
+  const [isDynamic, setIsDynamic] = useState(false)
 
   const handleTypeSelect = (type) => {
     setSelectedType(type)
@@ -40,14 +41,14 @@ const CreatePage = () => {
     setDesign(newDesign)
   }
 
-  const handleSaveQR = async () => {
+const handleSaveQR = async () => {
     try {
       const qrData = {
         type: selectedType,
         content: content,
         design: design,
-        isDynamic: false,
-        shortUrl: `https://qr.ly/${Math.random().toString(36).substr(2, 9)}`,
+        isDynamic: isDynamic,
+        shortUrl: isDynamic ? `https://qr.ly/${Math.random().toString(36).substr(2, 9)}` : null,
         scanCount: 0,
         createdAt: new Date().toISOString(),
         folderId: null,
@@ -55,7 +56,7 @@ const CreatePage = () => {
       }
 
       await qrCodeService.create(qrData)
-      toast.success("QR code saved to library!")
+      toast.success(`${isDynamic ? 'Dynamic' : 'Static'} QR code saved to library!`)
     } catch (error) {
       toast.error("Failed to save QR code")
     }
@@ -177,12 +178,14 @@ const CreatePage = () => {
           </div>
 
           <div>
-            <QRPreview
+<QRPreview
               content={content}
               design={design}
               type={selectedType}
               onExport={handleExportQR}
               onSave={handleSaveQR}
+              isDynamic={isDynamic}
+              shortUrl={isDynamic ? `https://qr.ly/${Math.random().toString(36).substr(2, 9)}` : null}
             />
           </div>
         </motion.div>
@@ -229,14 +232,64 @@ const CreatePage = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+<div className="lg:col-span-2">
             <QRPreview
               content={content}
               design={design}
               type={selectedType}
               onExport={handleExportQR}
               onSave={handleSaveQR}
+              isDynamic={isDynamic}
+              shortUrl={isDynamic ? `https://qr.ly/${Math.random().toString(36).substr(2, 9)}` : null}
             />
+            
+            {/* Dynamic QR Toggle */}
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900">QR Code Type</h3>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Choose between static and dynamic QR codes
+                  </p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Button
+                    type="button"
+                    variant={!isDynamic ? "default" : "secondary"}
+                    size="sm"
+                    onClick={() => setIsDynamic(false)}
+                  >
+                    <ApperIcon name="Lock" className="w-4 h-4 mr-2" />
+                    Static
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={isDynamic ? "default" : "secondary"}
+                    size="sm"
+                    onClick={() => setIsDynamic(true)}
+                  >
+                    <ApperIcon name="Link" className="w-4 h-4 mr-2" />
+                    Dynamic
+                  </Button>
+                </div>
+              </div>
+              
+              {isDynamic && (
+                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="flex items-start">
+                    <ApperIcon name="Info" className="w-5 h-5 text-blue-600 mr-2 mt-0.5" />
+                    <div className="text-sm">
+                      <h4 className="font-semibold text-blue-900">Dynamic QR Benefits:</h4>
+                      <ul className="text-blue-700 mt-1 space-y-1">
+                        <li>• Edit destination without reprinting</li>
+                        <li>• Track detailed analytics</li>
+                        <li>• Update content anytime</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
             
             <div className="mt-6 grid grid-cols-2 gap-4">
               <Button

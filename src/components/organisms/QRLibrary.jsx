@@ -14,14 +14,14 @@ import { folderService } from "@/services/api/folderService"
 import { formatDistanceToNow } from "date-fns"
 
 const QRLibrary = () => {
-  const [qrCodes, setQrCodes] = useState([])
+const [qrCodes, setQrCodes] = useState([])
   const [folders, setFolders] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedFolder, setSelectedFolder] = useState("all")
   const [viewMode, setViewMode] = useState("grid")
-
+  const [editingQR, setEditingQR] = useState(null)
   useEffect(() => {
     loadData()
   }, [])
@@ -41,6 +41,15 @@ const QRLibrary = () => {
     } finally {
       setLoading(false)
     }
+  }
+
+const handleEdit = (qrCode) => {
+    setEditingQR(qrCode)
+  }
+
+  const handleEditComplete = (updatedQR) => {
+    setQrCodes(qrCodes.map(qr => qr.Id === updatedQR.Id ? updatedQR : qr))
+    setEditingQR(null)
   }
 
   const handleDelete = async (id) => {
@@ -206,19 +215,34 @@ const QRLibrary = () => {
                       transition={{ delay: index * 0.1 }}
                     >
                       <Card hover className="p-6">
-                        <div className="flex items-center justify-between mb-4">
+<div className="flex items-center justify-between mb-4">
                           <div className="flex items-center">
                             <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
                               <ApperIcon name={getQRTypeIcon(qrCode.type)} className="w-4 h-4 text-primary-600" />
                             </div>
-                            <div className="ml-3">
+                            <div className="ml-3 flex items-center gap-2">
                               <Badge variant="primary" size="sm">
                                 {getQRTypeLabel(qrCode.type)}
                               </Badge>
+                              {qrCode.isDynamic && (
+                                <Badge variant="secondary" size="sm">
+                                  <ApperIcon name="Link" className="w-3 h-3 mr-1" />
+                                  Dynamic
+                                </Badge>
+                              )}
                             </div>
                           </div>
                           
                           <div className="flex items-center space-x-1">
+                            {qrCode.isDynamic && (
+                              <button
+                                onClick={() => handleEdit(qrCode)}
+                                className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                title="Edit content"
+                              >
+                                <ApperIcon name="Edit3" className="w-4 h-4" />
+                              </button>
+                            )}
                             <button
                               onClick={() => handleDownload(qrCode)}
                               className="p-1.5 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
@@ -270,7 +294,7 @@ const QRLibrary = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {filteredQrCodes.map((qrCode) => (
+{filteredQrCodes.map((qrCode) => (
                           <tr key={qrCode.Id} className="border-b border-gray-100 hover:bg-gray-50">
                             <td className="py-4 px-6">
                               <div className="flex items-center">
@@ -281,13 +305,26 @@ const QRLibrary = () => {
                                   <div className="font-medium text-gray-900 truncate max-w-xs">
                                     {getContentPreview(qrCode)}
                                   </div>
+                                  {qrCode.isDynamic && (
+                                    <div className="text-xs text-gray-500 font-mono mt-1">
+                                      {qrCode.shortUrl}
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             </td>
                             <td className="py-4 px-6">
-                              <Badge variant="primary" size="sm">
-                                {getQRTypeLabel(qrCode.type)}
-                              </Badge>
+                              <div className="flex items-center gap-2">
+                                <Badge variant="primary" size="sm">
+                                  {getQRTypeLabel(qrCode.type)}
+                                </Badge>
+                                {qrCode.isDynamic && (
+                                  <Badge variant="secondary" size="sm">
+                                    <ApperIcon name="Link" className="w-3 h-3 mr-1" />
+                                    Dynamic
+                                  </Badge>
+                                )}
+                              </div>
                             </td>
                             <td className="py-4 px-6 text-gray-600">
                               {formatDistanceToNow(new Date(qrCode.createdAt), { addSuffix: true })}
@@ -297,6 +334,16 @@ const QRLibrary = () => {
                             </td>
                             <td className="py-4 px-6">
                               <div className="flex items-center justify-end space-x-2">
+                                {qrCode.isDynamic && (
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleEdit(qrCode)}
+                                    className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                                  >
+                                    <ApperIcon name="Edit3" className="w-4 h-4" />
+                                  </Button>
+                                )}
                                 <Button
                                   variant="ghost"
                                   size="sm"

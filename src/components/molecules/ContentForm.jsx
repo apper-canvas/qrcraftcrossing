@@ -4,7 +4,7 @@ import Button from "@/components/atoms/Button"
 import ApperIcon from "@/components/ApperIcon"
 import { cn } from "@/utils/cn"
 
-const ContentForm = ({ type, content, onChange, onGenerate }) => {
+const ContentForm = ({ type, content, onChange, onGenerate, isDynamic = false, isEditing = false }) => {
   const [formData, setFormData] = useState(content || {})
   const [errors, setErrors] = useState({})
 
@@ -213,14 +213,28 @@ const ContentForm = ({ type, content, onChange, onGenerate }) => {
     )
   }
 
-  return (
+return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {isDynamic && !isEditing && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-center">
+            <ApperIcon name="Info" className="w-5 h-5 text-blue-600 mr-2" />
+            <div>
+              <h4 className="text-sm font-semibold text-blue-900">Dynamic QR Code</h4>
+              <p className="text-xs text-blue-700 mt-1">
+                This QR code can be edited after creation without changing the physical code
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {renderForm()}
       
       <div className="flex justify-end pt-4 border-t border-gray-200">
         <Button type="submit" size="lg" className="btn-glow">
-          <ApperIcon name="Zap" className="w-5 h-5 mr-2" />
-          Generate QR Code
+          <ApperIcon name={isEditing ? "Save" : "Zap"} className="w-5 h-5 mr-2" />
+          {isEditing ? "Update Content" : "Generate QR Code"}
         </Button>
       </div>
     </form>

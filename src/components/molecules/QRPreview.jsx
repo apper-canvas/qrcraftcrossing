@@ -4,7 +4,7 @@ import ApperIcon from "@/components/ApperIcon"
 import Button from "@/components/atoms/Button"
 import Badge from "@/components/atoms/Badge"
 
-const QRPreview = ({ content, design, type, onExport, onSave }) => {
+const QRPreview = ({ content, design, type, onExport, onSave, isDynamic = false, shortUrl }) => {
   const [qrData, setQrData] = useState(null)
   const [scannability, setScannability] = useState({ score: 0, level: "Low" })
 
@@ -91,9 +91,20 @@ const QRPreview = ({ content, design, type, onExport, onSave }) => {
       animate={{ opacity: 1, scale: 1 }}
       className="bg-white rounded-xl border border-gray-200 p-6 space-y-6"
     >
-      <div className="text-center">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Live Preview</h3>
+<div className="text-center">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <h3 className="text-lg font-semibold text-gray-900">Live Preview</h3>
+          {isDynamic && (
+            <Badge variant="secondary" size="sm">
+              <ApperIcon name="Link" className="w-3 h-3 mr-1" />
+              Dynamic
+            </Badge>
+          )}
+        </div>
         <p className="text-sm text-gray-600">Scan with your phone to test</p>
+        {isDynamic && shortUrl && (
+          <p className="text-xs text-blue-600 mt-1 font-mono">{shortUrl}</p>
+        )}
       </div>
 
       <div className="qr-canvas-container rounded-xl p-8 flex items-center justify-center">
