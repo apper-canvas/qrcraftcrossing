@@ -123,15 +123,26 @@ const handleSaveQR = async () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <div className="max-w-2xl mx-auto mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Create Your QR Code
-            </h1>
-            <p className="text-lg text-gray-600">
-              Choose the type of content you want to encode in your QR code
-            </p>
+<div className="max-w-2xl mx-auto mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  Create Your QR Code
+                </h1>
+                <p className="text-lg text-gray-600">
+                  Choose the type of content you want to encode in your QR code
+                </p>
+              </div>
+              <Button 
+                variant="secondary" 
+                onClick={() => window.location.href = '/bulk'}
+                className="shrink-0"
+              >
+                <ApperIcon name="Upload" className="w-4 h-4 mr-2" />
+                Bulk Import
+              </Button>
+            </div>
           </div>
-          
           <QRTypeSelector
             selectedType={selectedType}
             onTypeSelect={handleTypeSelect}

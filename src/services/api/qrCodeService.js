@@ -28,6 +28,16 @@ async create(qrCode) {
     return { ...newQrCode }
   }
 
+  async createBulk(qrCodes) {
+    await this.simulateDelay()
+    const results = []
+    for (const qrCode of qrCodes) {
+      const newQrCode = await this.create(qrCode)
+      results.push(newQrCode)
+    }
+    return results
+  }
+
 async update(id, qrCode) {
     await this.simulateDelay()
     const index = this.data.findIndex(item => item.Id === parseInt(id))
