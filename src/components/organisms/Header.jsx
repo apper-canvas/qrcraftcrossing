@@ -10,10 +10,11 @@ const Header = () => {
   const location = useLocation()
 
   const navigation = [
-    { name: "Create", href: "/", icon: "Plus" },
+{ name: "Create", href: "/", icon: "Plus" },
     { name: "Library", href: "/library", icon: "FolderOpen" },
     { name: "Templates", href: "/templates", icon: "Layout" },
     { name: "Analytics", href: "/analytics", icon: "BarChart3" },
+    { name: "Offline", href: "/offline", icon: "Wifi" },
     { name: "Settings", href: "/settings", icon: "Settings" }
   ]
 

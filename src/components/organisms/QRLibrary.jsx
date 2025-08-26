@@ -11,7 +11,9 @@ import Error from "@/components/ui/Error"
 import Empty from "@/components/ui/Empty"
 import { qrCodeService } from "@/services/api/qrCodeService"
 import { folderService } from "@/services/api/folderService"
+import { offlineStorageService } from "@/services/offlineStorageService"
 import { formatDistanceToNow } from "date-fns"
+
 const QRLibrary = () => {
 const [qrCodes, setQrCodes] = useState([])
   const [folders, setFolders] = useState([])
@@ -21,24 +23,80 @@ const [qrCodes, setQrCodes] = useState([])
   const [selectedFolder, setSelectedFolder] = useState("all")
   const [viewMode, setViewMode] = useState("grid")
   const [editingQR, setEditingQR] = useState(null)
-  useEffect(() => {
+  const [isOffline, setIsOffline] = useState(!navigator.onLine)
+useEffect(() => {
     loadData()
+    
+    // Listen for online/offline events
+    const handleOnline = () => {
+      setIsOffline(false)
+      syncOfflineData()
+    }
+    const handleOffline = () => setIsOffline(true)
+    
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+    
+    return () => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    }
   }, [])
 
-  const loadData = async () => {
+const loadData = async () => {
     try {
       setError(null)
       setLoading(true)
-      const [qrData, folderData] = await Promise.all([
-        qrCodeService.getAll(),
-        folderService.getAll()
-      ])
-      setQrCodes(qrData)
-      setFolders(folderData)
+      
+      if (isOffline) {
+        // Load from offline storage
+        const offlineData = await offlineStorageService.getAll()
+        setQrCodes(offlineData)
+        const folderData = await folderService.getAll()
+        setFolders(folderData)
+      } else {
+        // Load from API and sync with offline storage
+        const [qrData, folderData] = await Promise.all([
+          qrCodeService.getAll(),
+          folderService.getAll()
+        ])
+        setQrCodes(qrData)
+        setFolders(folderData)
+        
+        // Save to offline storage for future offline access
+        await offlineStorageService.syncFromAPI(qrData)
+      }
     } catch (err) {
-      setError("Failed to load QR codes")
+      setError(isOffline ? "Failed to load offline QR codes" : "Failed to load QR codes")
+      
+      // Fallback to offline data if online request fails
+      if (!isOffline) {
+        try {
+          const offlineData = await offlineStorageService.getAll()
+          if (offlineData.length > 0) {
+            setQrCodes(offlineData)
+            setError("Loaded offline data - some features may be limited")
+          }
+        } catch (offlineErr) {
+          console.error("Failed to load offline fallback data:", offlineErr)
+        }
+      }
     } finally {
       setLoading(false)
+    }
+  }
+
+  const syncOfflineData = async () => {
+    try {
+      const pendingSync = await offlineStorageService.getPendingSync()
+      if (pendingSync.length > 0) {
+        toast.info(`Syncing ${pendingSync.length} offline changes...`)
+        await offlineStorageService.syncToAPI()
+        await loadData()
+        toast.success("Offline changes synced successfully!")
+      }
+    } catch (err) {
+      toast.error("Failed to sync offline changes")
     }
   }
 

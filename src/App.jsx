@@ -1,12 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { ToastContainer } from "react-toastify"
-import Layout from "@/components/organisms/Layout"
-import CreatePage from "@/components/pages/CreatePage"
-import LibraryPage from "@/components/pages/LibraryPage"
-import TemplatesPage from "@/components/pages/TemplatesPage"
-import AnalyticsPage from "@/components/pages/AnalyticsPage"
-import SettingsPage from "@/components/pages/SettingsPage"
-import BulkImportPage from "@/components/pages/BulkImportPage"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import OfflinePage from "@/components/pages/OfflinePage";
+import React from "react";
+import BulkImportPage from "@/components/pages/BulkImportPage";
+import CreatePage from "@/components/pages/CreatePage";
+import AnalyticsPage from "@/components/pages/AnalyticsPage";
+import LibraryPage from "@/components/pages/LibraryPage";
+import TemplatesPage from "@/components/pages/TemplatesPage";
+import SettingsPage from "@/components/pages/SettingsPage";
+import Layout from "@/components/organisms/Layout";
 
 function App() {
   return (
@@ -18,7 +20,8 @@ function App() {
             <Route path="library" element={<LibraryPage />} />
             <Route path="bulk" element={<BulkImportPage />} />
             <Route path="templates" element={<TemplatesPage />} />
-            <Route path="analytics" element={<AnalyticsPage />} />
+<Route path="analytics" element={<AnalyticsPage />} />
+            <Route path="offline" element={<OfflinePage />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>
         </Routes>

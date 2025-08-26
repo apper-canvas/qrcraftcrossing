@@ -40,6 +40,22 @@ const Loading = ({ variant = "default" }) => {
     )
   }
 
+  if (variant === "offline") {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="text-center">
+          <motion.div 
+            className="w-12 h-12 border-4 border-orange-200 border-t-orange-600 rounded-full mx-auto mb-4"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          />
+          <div className="text-gray-600 font-medium">Loading offline data...</div>
+          <div className="text-sm text-gray-400 mt-1">Accessing locally stored QR codes</div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex items-center justify-center py-20">
       <div className="text-center">
