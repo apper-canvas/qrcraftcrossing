@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import QRCode from "qrcode"
 import ApperIcon from "@/components/ApperIcon"
 import Button from "@/components/atoms/Button"
 import Badge from "@/components/atoms/Badge"
@@ -15,27 +16,44 @@ const QRPreview = ({ content, design, type, onExport, onSave, isDynamic = false,
     }
   }, [content, design, type])
 
-  const generateQRCode = () => {
-    // Simulate QR code generation with canvas
-    const canvas = document.createElement("canvas")
-    const ctx = canvas.getContext("2d")
-    canvas.width = 200
-    canvas.height = 200
-    
-    // Simple QR pattern simulation
-    ctx.fillStyle = design?.backgroundColor || "#000000"
-    ctx.fillRect(0, 0, 200, 200)
-    
-    ctx.fillStyle = design?.foregroundColor || "#ffffff"
-    for (let i = 0; i < 20; i++) {
-      for (let j = 0; j < 20; j++) {
-        if (Math.random() > 0.5) {
-          ctx.fillRect(i * 10, j * 10, 8, 8)
+const generateQRCode = async () => {
+    try {
+      // Create the data string based on content type
+      let qrContent = content
+      
+      if (type === 'url' && content && !content.startsWith('http')) {
+        qrContent = `https://${content}`
+      } else if (type === 'email') {
+        qrContent = `mailto:${content}`
+      } else if (type === 'phone') {
+        qrContent = `tel:${content}`
+      } else if (type === 'sms') {
+        qrContent = `sms:${content}`
+      } else if (type === 'wifi') {
+        // For WiFi, content should be formatted as: SSID:password:security
+        const [ssid, password, security = 'WPA'] = (content || '').split(':')
+        if (ssid) {
+          qrContent = `WIFI:T:${security};S:${ssid};P:${password || ''};H:false;;`
         }
       }
+
+      // Generate QR code with proper options
+      const options = {
+        width: 400,
+        margin: 2,
+        color: {
+          dark: design?.foregroundColor || '#000000',
+          light: design?.backgroundColor || '#FFFFFF'
+        },
+        errorCorrectionLevel: 'M'
+      }
+
+      const qrDataUrl = await QRCode.toDataURL(qrContent, options)
+      setQrData(qrDataUrl)
+    } catch (error) {
+      console.error('QR Code generation failed:', error)
+      setQrData(null)
     }
-    
-    setQrData(canvas.toDataURL())
   }
 
   const checkScannability = () => {
